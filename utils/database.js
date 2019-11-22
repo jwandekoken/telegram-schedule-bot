@@ -4,7 +4,7 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 
 const mongoConnect = cb => {
-  MongoClient.connect('mongodb://localhost:27017', 
+  MongoClient.connect('mongodb://localhost:27017/telegramBotAgenda', 
   { useUnifiedTopology: true })
     .then(client => {
       console.log('Connected to MongoDB!');

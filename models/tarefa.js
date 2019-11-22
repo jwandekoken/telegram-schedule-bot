@@ -23,7 +23,7 @@ class tarefa {
       dbOperation = db.collection('tarefas').updateOne(
         { _id: this._id },
         { $set: {
-            descricao = this.descricao,
+            descricao: this.descricao,
             dtPrevisao: this.dtPrevisao,
             dtConclusao: this.dtConclusao,
             observacao: this.observacao
