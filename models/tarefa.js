@@ -41,13 +41,17 @@ class tarefa {
 
   static fetchAll() {
     const db = getDb();
-    return db.colelction('tarefas').find().toArray()
-      .then(tarefas => {
-        return tarefas;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // quero aqui ordenar pelos campos 'dtPrevisao', depois 'descricao', e ambos em sentido ascendente (1)
+    // sort(keyOrList, direction)
+    return db.collection('tarefas').find()
+      .sort(['dtPrevisao', 'descricao'], 1)
+      .toArray()
+        .then(tarefas => {
+          return tarefas;
+        })
+        .catch(err => {
+          console.log(err);
+        });
   }
 
   static findById(tarefaId) {
@@ -56,7 +60,7 @@ class tarefa {
       { _id: new ObjectId(tarefaId) }
     )
     .then(tarefa => {
-      console.log(tarefa);
+      console.log('from tarefaModel, tarefa: ', tarefa);
       return tarefa;
     })
     .catch(err => {

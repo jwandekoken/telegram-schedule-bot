@@ -6,13 +6,6 @@ exports.postAddTarefa = (req, res, next) => {
   const dtConclusao = req.body.dtConclusao;
   const observacao = req.body.observacao;
 
-  console.log({
-    descricao,
-    dtPrevisao,
-    dtConclusao,
-    observacao
-  });
-
   const tarefa = new Tarefa(
     descricao,
     dtPrevisao,
@@ -28,7 +21,10 @@ exports.postAddTarefa = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      // TODO: THROW NEW ERROR
+      if(!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 }
 
@@ -54,7 +50,10 @@ exports.putEditTarefa = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      // TODO: THROW NEW ERROR
+      if(!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 }
 
@@ -65,12 +64,15 @@ exports.getTarefas = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      // TODO: THROW NEW ERROR
+      if(!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 }
 
 exports.getTarefaById = (req, res, next) => {
-  const tarefaId = req.query.tarefaId;
+  const tarefaId = req.params.tarefaId;
 
   Tarefa.findById(tarefaId)
     .then(tarefa => {
@@ -78,12 +80,15 @@ exports.getTarefaById = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      // TODO: THROW NEW ERROR
+      if(!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 }
 
 exports.postDeleteTarefa = (req, res, next) => {
-  const tarefaId = req.query.tarefaId;
+  const tarefaId = req.params.tarefaId;
 
   Tarefa.deleteById(tarefaId)
     .then(() => {
@@ -94,7 +99,10 @@ exports.postDeleteTarefa = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      // TODO: THROW NEW ERROR
+      if(!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     })
 }
 
