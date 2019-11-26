@@ -2,14 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoConnect = require('./utils/database').mongoConnect;
 
-const tarefaRoutes = require('./routes/tarefa');
+const taskRoutes = require('./routes/task');
 const bot = require('./bot').bot;
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.use(tarefaRoutes);
+app.use(taskRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
